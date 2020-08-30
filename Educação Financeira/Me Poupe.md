@@ -26,12 +26,12 @@
 ## Capítulo 3
 * Cuide do autoconhecimento.
 * Metas:
-    Curtíssimo prazo(1 mês) *  Comprar um monitor novo
-    Curtíssimo prazo(até 1 ano) *  Comprar um notebook novo
-    Curto(até 2 anos) *  Morar sozinho
-    Médio(2 a 5 anos) *  Comprar um  carro
-    Longo prazo(5 a 10 anos) *  Comprar um apartamento
-    Longuíssimo prazo(Mais de 10 anos) *  Conquistar a idependência financeira.
+    * Curtíssimo prazo(1 mês) Ex:  Comprar um monitor novo
+    * Curtíssimo prazo(até 1 ano) Ex:  Comprar um notebook novo
+    * Curto(até 2 anos) Ex:  Morar sozinho
+    * Médio(2 a 5 anos) Ex:  Comprar um  carro
+    * Longo prazo(5 a 10 anos) Ex:  Comprar um apartamento
+    * Longuíssimo prazo(Mais de 10 anos) Ex:  Conquistar a idependência financeira.
 
 ## Capítulo 4
 * Não desperdice o que você suou tanto para ganhar.
