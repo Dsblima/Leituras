@@ -5,7 +5,7 @@
 * diagrama de perdas e ganhos
 
 |O que você ganha        | O que você perde |               
-|-------------------------------------------|
+| ---------------------- | ---------------- |
 |se obtiver?             |  se obtiver?     |
 |                        |                  |
 |                        |                  |
