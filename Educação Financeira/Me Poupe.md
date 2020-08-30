@@ -10,13 +10,13 @@
 |                        |                  |
 |                        |                  |
 |                        |                  |                
-|------------------------|------------------|
+|                        |                  |
 |se não obtiver?         |  se não obtiver? |
 |                        |                  |
 |                        |                  |
 |                        |                  |                
 |                        |                  |               
-|-------------------------------------------|                       
+                       
 
 * O que você pode fazer para minimizar as perdas?
 * O que você pode fazer para manter os ganhos?
