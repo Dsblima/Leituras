@@ -45,3 +45,55 @@ those things is usually the most appropriate course.
 class with GSD.
 * Shorter names are generally better than longer ones, so long as they are clear. Add no
 more context to a name than is necessary.
+
+# Chapter 3 - Functions
+* Functions should not be 100 lines long.
+Functions should hardly ever be 20 lines long.
+* Every function in this program was just two, or three, or four lines long. Each was transparently obvious. Each told
+a story. And each led you to the next in a compelling order. That’s how short your functions
+should be!
+* Therefore, the indent level of a function should not be greater than one or two. 
+* FUNCTIONS SHOULD DO ONE THING. THEY SHOULD DO IT WELL.
+THEY SHOULD DO IT ONLY.
+* Another way to know that a function is doing more than “one thing” is if you can
+extract another function from it with a name that is not merely a restatement of its implementation 
+* Functions that do one thing cannot be reasonably divided into sections.
+* In order to make sure our functions are doing “one thing,” we need to make sure that the
+statements within our function are all at the same level of abstraction.
+* The smaller and more focused a function is, the easier it is to choose a descriptive
+name.
+* A long descriptive name is better than a short
+enigmatic name.
+* A long descriptive name is better than a long descriptive comment.
+* Be consistent in your names. Use the same phrases, nouns, and verbs in the function
+names you choose for your modules.
+* The similar phraseology in those names allows the sequence to tell a story.
+*  Imagine the difficulty of
+writing all the test cases to ensure that all the various combinations of arguments work
+properly
+* One input argument is the next best thing to no arguments.
+* You should choose names that make the distinction clear, and always use the two
+forms in a consistent context.
+* Even obvious dyadic functions like assertEquals(expected, actual) are problematic.
+How many times have you put the actual where the expected should be?
+* Anything that forces you to check the function signature is equivalent to a double-take. It’s
+a cognitive break and should be avoided.
+# Chapter 4 - Comments
+* If our programming languages were expressive enough, or if we had the talent to subtly wield those languages to express our intent, we would not need comments very much—perhaps not at all.
+* The proper use of comments is to compensate for our failure to express ourself in code.
+* Every time you write a comment, you should grimace and feel the failure of your ability of
+expression.
+* The older a comment is, and the farther away it is from the code it describes, the more likely it is to be just plain wrong. 
+* I would rather that energy go toward making the code so clear and expressive that it does not need the comments in the first place.
+* Inaccurate comments are far worse than no comments at all.
+*  Only the code can truly tell you what
+it does. 
+* One of the more common motivations for writing comments is bad code.
+* Unfortunately,
+many programmers have taken this to mean that code is seldom, if ever, a good means for
+explanation. 
+* In many cases it’s simply a matter of creating a function that says the same thing as the comment you want to write.
+*Sometimes our corporate coding standards force us to write certain comments for legal
+reasons. 
+# Chapter 5 - Formatting
+# Chapter 6 - Objects and Data Structures
