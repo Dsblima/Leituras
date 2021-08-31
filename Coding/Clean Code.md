@@ -93,7 +93,17 @@ it does.
 many programmers have taken this to mean that code is seldom, if ever, a good means for
 explanation. 
 * In many cases it’s simply a matter of creating a function that says the same thing as the comment you want to write.
-*Sometimes our corporate coding standards force us to write certain comments for legal
+* Sometimes our corporate coding standards force us to write certain comments for legal
 reasons. 
 # Chapter 5 - Formatting
+* You should take care that your code is nicely formatted. You should choose a set of simple rules that govern the format of your code, and then you should consistently apply those rules. If you are working on a team, then the team should agree to a single set of formatting rules and all members should comply. It helps to have an automated tool that can apply those formatting rules for you.
+## The Purpose of Formatting
+* First of all, let’s be clear. Code formatting is important. It is too important to ignore and it is too important to treat religiously. Code formatting is about communication, and communication is the professional developer’s first order of business.
+* The functionality that you create today has a good chance of changing in the next release, but the readability of your code will have a profound effect on all the changes that will ever be made. The coding style and readability set precedents that continue to affect maintainability and extensibility long after the original code has been changed beyond recognition. Your style and discipline survives, even though your code does not.
+## The Newspaper Metaphor
+* We would like a source file to be like a newspaper article. The name should be simple but explanatory. The name, by itself, should be sufficient to tell us whether we are in the right module or not. The topmost parts of the source file should provide the high-level concepts and algorithms. Detail should increase as we move downward, until at the end we find the lowest level functions and details in the source file.
+## Vertical Openness Between Concepts 
+* Nearly all code is read left to right and top to bottom. Each line represents an expression or a clause, and each group of lines represents a complete thought. Those thoughts should be separated from each other with blank lines.
+## Vertical Density 
+* If openness separates concepts, then vertical density implies close association. So lines of code that are tightly related should appear vertically dense.
 # Chapter 6 - Objects and Data Structures
