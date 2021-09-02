@@ -289,3 +289,36 @@ interface still unmistakably represents a data structure.
 
 ### Cross-Cutting Concerns
 * In principle, you can reason about your persistence strategy in a modular, encapsulated way.Yet, in practice, you have to spread essentially the same code that implements the persistence strategy across many objects. We use the term cross-cutting concerns for concerns like these. Again, the persistence framework might be modular and our domain logic, in isolation, might be modular. The problem is the fine-grained intersection of these domains.
+
+# Chapter 12 - Emergence
+## Getting Clean via Emergent Design
+* According to Kent, a design is “simple” if it follows these rules:
+> Runs all the tests
+> Contains no duplication
+> Expresses the intent of the programmer
+> Minimizes the number of classes and methods
+* The rules are given in order of importance.
+
+## Simple Design Rule 1: Runs All the Tests 
+* First and foremost, a design must produce a system that acts as intended. A system might have a perfect design on paper, but if there is no simple way to verify that the system actually works as intended, then all the paper effort is questionable. 
+* A system that is comprehensively tested and passes all of its tests all of the time is a testable system. That’s an obvious statement, but an important one. Systems that aren’t testable aren’t verifiable. Arguably, a system that cannot be verified should never be deployed. 
+* Fortunately, making our systems testable pushes us toward a design where our classes are small and single purpose.
+* So making sure our system is fully testable helps us create better designs.
+
+## Simple Design Rules 2–4: Refactoring
+* For each few lines of code we add, we pause and reflect on the new design. Did we just degrade it? If so, we clean it up and run our tests to demonstrate that we haven’t broken anything. The fact that we have these tests eliminates the fear that cleaning up the code will break it! 
+* During this refactoring step, we can apply anything from the entire body of knowledge about good software design. We can increase cohesion, decrease coupling, separate concerns, modularize system concerns, shrink our functions and classes, choose better names, and so on. This is also where we apply the final three rules of simple design: Eliminate duplication, ensure expressiveness, and minimize the number of classes and methods.
+
+## No Duplication
+* Lines of code that look exactly alike are, of course, duplication. Lines of code that are similar can often be massaged to look even more alike so that they can be more easily refactored. And duplication can exist in other forms such as duplication of implementation.
+
+## Expressive
+* The majority of the cost of a software project is in long-term maintenance. In order to minimize the potential for defects as we introduce change, it’s critical for us to be able to understand what a system does. As systems become more complex, they take more and more time for a developer to understand, and there is an ever greater opportunity for a misunderstanding. Therefore, code should clearly express the intent of its author. The clearer the author can make the code, the less time others will have to spend understanding it. This will reduce defects and shrink the cost of maintenance. 
+* You can express yourself by choosing good names. We want to be able to hear a class or function name and not be surprised when we discover its responsibilities. 
+* You can also express yourself by keeping your functions and classes small. Small classes and functions are usually easy to name, easy to write, and easy to understand.
+
+## Minimal Classes and Methods
+* Our goal is to keep our overall system small while we are also keeping our functions and classes small. Remember, however, that this rule is the lowest priority of the four rules of Simple Design. So, although it’s important to keep class and function count low, it’s more important to have tests, eliminate duplication, and express yourself. 
+
+## Conclusion 
+* Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn
