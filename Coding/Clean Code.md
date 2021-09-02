@@ -267,3 +267,25 @@ interface still unmistakably represents a data structure.
 ### Isolating from Change 
 * Needs will change, therefore code will change. We learned in OO 101 that there are concrete classes, which contain implementation details (code), and abstract classes, which represent concepts only. A client class depending upon concrete details is at risk when those details change. We can introduce interfaces and abstract classes to help isolate the impact of those details.
 * By minimizing coupling in this way, our classes adhere to another class design principle known as the Dependency Inversion Principle (DIP).5 In essence, the DIP says that our classes should depend upon abstractions, not on concrete details.
+
+# Chapter 10 - Systems
+## Separate Constructing a System from Using It
+* The separation of concerns is one of the oldest and most important design techniques in our craft.
+
+### Separation of Main 
+* One way to separate construction from use is simply to move all aspects of construction to main, or modules called by main, and to design the rest of the system assuming that all objects have been constructed and wired up appropriately.
+* The flow of control is easy to follow. The main function builds the objects necessary for the system, then passes them to the application, which simply uses them.
+
+### Factories
+* Sometimes, of course, we need to make the application responsible for when an object gets created.
+
+### Dependency Injection 
+* A powerful mechanism for separating construction from use is Dependency Injection (DI), the application of Inversion of Control (IoC) to dependency management.3 Inversion of Control moves secondary responsibilities from an object to other objects that are dedicated to the purpose, thereby supporting the Single Responsibility Principle. In the context of dependency management, an object should not take responsibility for instantiating dependencies itself. Instead, it should pass this responsibility to another “authoritative” mechanism, thereby inverting the control.
+* True Dependency Injection goes one step further. The class takes no direct steps to resolve its dependencies; it is completely passive. Instead, it provides setter methods or constructor arguments (or both) that are used to inject the dependencies. During the construction process, the DI container instantiates the required objects (usually on demand) and uses the constructor arguments or setter methods provided to wire together the dependencies. Which dependent objects are actually used is specified through a configuration file or programmatically in a special-purpose construction module.
+
+### Scaling Up
+* It is a myth that we can get systems “right the first time.” Instead, we should implement only today’s stories, then refactor and expand the system to implement new stories tomorrow. This is the essence of iterative and incremental agility. Test-driven development, refactoring, and the clean code they produce make this work at the code level.
+> Software systems are unique compared to physical systems. Their architectures can grow incrementally, if we maintain the proper separation of concerns.
+
+### Cross-Cutting Concerns
+* In principle, you can reason about your persistence strategy in a modular, encapsulated way.Yet, in practice, you have to spread essentially the same code that implements the persistence strategy across many objects. We use the term cross-cutting concerns for concerns like these. Again, the persistence framework might be modular and our domain logic, in isolation, might be modular. The problem is the fine-grained intersection of these domains.
