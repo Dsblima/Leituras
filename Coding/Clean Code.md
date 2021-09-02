@@ -204,7 +204,9 @@ interface still unmistakably represents a data structure.
 
 ## The Three Laws of TDD
 > First Law You may not write production code until you have written a failing unit test.
+
 >Second Law You may not write more of a unit test than is sufficient to fail, and not compiling is failing.
+
 >Third Law You may not write more production code than is sufficient to pass the currently failing test.
 
 * These three laws lock you into a cycle that is perhaps thirty seconds long. The tests and the production code are written together, with the tests just a few seconds ahead of the production code
@@ -228,9 +230,13 @@ interface still unmistakably represents a data structure.
 
 ## F.I.R.S.T.
 > Fast: Tests should be fast.
+
 > Independent: Tests should not depend on each other.
+
 > Repeatable: Tests should be repeatable in any environment.
+
 > Self-Validating: The tests should have a boolean output.
+
 > Timely: The tests need to be written in a timely fashion. 
 
 # Classes
@@ -294,8 +300,11 @@ interface still unmistakably represents a data structure.
 ## Getting Clean via Emergent Design
 * According to Kent, a design is “simple” if it follows these rules:
 > Runs all the tests
+
 > Contains no duplication
+
 > Expresses the intent of the programmer
+
 > Minimizes the number of classes and methods
 * The rules are given in order of importance.
 
@@ -321,4 +330,107 @@ interface still unmistakably represents a data structure.
 * Our goal is to keep our overall system small while we are also keeping our functions and classes small. Remember, however, that this rule is the lowest priority of the four rules of Simple Design. So, although it’s important to keep class and function count low, it’s more important to have tests, eliminate duplication, and express yourself. 
 
 ## Conclusion 
-* Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn
+* Is there a set of simple practices that can replace experience? Clearly not. On the other hand, the practices described in this chapter and in this book are a crystallized form of the many decades of experience enjoyed by the authors. Following the practice of simple design can and does encourage and enable developers to adhere to good principles and patterns that otherwise take years to learn.
+
+# Chapter 13 - Concurrency
+## Why Concurrency? 
+* Concurrency is a decoupling strategy. It helps us decouple what gets done from when it gets done. In single-threaded applications what and when are so strongly coupled that the state of the entire application can often be determined by looking at the stack backtrace. A programmer who debugs such a system can set a breakpoint, or a sequence of breakpoints, and know the state of the system by which breakpoints are hit.
+
+### Myths and Misconceptions
+> Concurrency always improves performance: Concurrency can sometimes improve performance, but only when there is a lot of wait time that can be shared between multiple threads or multiple processors. Neither situation is trivial. 
+
+> Design does not change when writing concurrent programs: In fact, the design of a concurrent algorithm can be remarkably different from the design of a single-threaded system. The decoupling of what from when usually has a huge effect on the structure of the system.
+
+> Understanding concurrency issues is not important when working with a container such as a Web or EJB container: In fact, you’d better know just what your container is doing and how to guard against the issues of concurrent update and deadlock described later in this chapter.
+
+#### Here are a few more balanced sound bites regarding writing concurrent software: 
+> Concurrency incurs some overhead, both in performance as well as writing additional code. 
+
+> Correct concurrency is complex, even for simple problems. 
+
+> Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs2 instead of the true defects they are. 
+
+> Concurrency often requires a fundamental change in design strategy.
+
+## Concurrency Defense Principles
+### Single Responsibility Principle 
+* The SRP5 states that a given method/class/component should have a single reason to change. Concurrency design is complex enough to be a reason to change in it’s own right and therefore deserves to be separated from the rest of the code.
+
+> Recommendation: Keep your concurrency-related code separate from other code.
+
+### Corollary: Limit the Scope of Data
+> Recommendation: Take data encapsulation to heart; severely limit the access of any data that may be shared.
+
+### Corollary: Threads Should Be as Independent as Possible 
+* Consider writing your threaded code such that each thread exists in its own world, sharing no data with any other thread. Each thread processes one client request, with all of its required data coming from an unshared source and stored as local variables. This makes each of those threads behave as if it were the only thread in the world and there were no synchronization requirements.
+
+> Recommendation: Attempt to partition data into independent subsets than can be operated on by independent threads, possibly in different processors.
+
+### Thread-Safe Collections
+> Recommendation: Review the classes available to you. In the case of Java, become familiar with java.util.concurrent, java.util.concurrent.atomic, java.util.concurrent.locks.
+
+### Producer-Consumer
+* This means producers must wait for free space in the queue before writing and consumers must wait until there is something in the queue to consume.
+* The producers write to the queue and signal that the queue is no longer empty. Consumers read from the queue and signal that the queue is no longer full. Both potentially wait to be notified when they can continue.
+
+### Readers-Writers
+* The challenge is to balance the needs of both readers and writers to satisfy correct operation, provide reasonable throughput and avoiding starvation. A simple strategy makes writers wait until there are no readers before allowing the writer to perform an update. If there are continuous readers, however, the writers will be starved. On the other hand, if there are frequent writers and they are given priority, throughput will suffer. Finding that balance and avoiding concurrent update issues is what the problem addresses.
+
+### Dining Philosophers 
+* Imagine a number of philosophers sitting around a circular table. A fork is placed to the left of each philosopher. There is a big bowl of spaghetti in the center of the table. The philosophers spend their time thinking unless they get hungry. Once hungry, they pick up the forks on either side of them and eat. A philosopher cannot eat unless he is holding two forks. If the philosopher to his right or left is already using one of the forks he needs, he must wait until that philosopher finishes eating and puts the forks back down. Once a philosopher eats, he puts both his forks back down on the table and waits until he is hungry again.
+
+> Recommendation: Learn these basic algorithms and understand their solutions.
+
+### Beware Dependencies Between Synchronized Methods
+* Recommendation: Avoid using more than one method on a shared object.
+
+## Keep Synchronized Sections Small 
+* The synchronized keyword introduces a lock.
+* Some naive programmers try to achieve this by making their critical sections very large. However, extending synchronization beyond the minimal critical section increases contention and degrades performance.
+> Recommendation: Keep your synchronized sections as small as possible.
+
+## Writing Correct Shut-Down Code Is Hard
+> Recommendation: Think about shut-down early and get it working early. It’s going to take longer than you expect. Review existing algorithms because this is probably harder than you think.
+
+## Testing Threaded Code
+> Recommendation: Write tests that have the potential to expose problems and then run them frequently, with different programatic configurations and system configurations and load. If tests ever fail, track down the failure. Don’t ignore a failure just because the tests pass on a subsequent run.
+
+> Treat spurious failures as candidate threading issues.
+
+> Get your nonthreaded code working first.
+
+> Make your threaded code pluggable.
+
+> Make your threaded code tunable.
+
+> Run with more threads than processors.
+
+> Run on different platforms.
+
+> Instrument your code to try and force failures.
+
+### Treat Spurious Failures as Candidate Threading Issues 
+* Threaded code causes things to fail that “simply cannot fail.” Most developers do not have an intuitive feel for how threading interacts with other code (authors included). Bugs in threaded code might exhibit their symptoms once in a thousand, or a million, executions. Attempts to repeat the systems can be frustratingly.
+
+> Recommendation: Do not ignore system failures as one-offs.
+
+### Make Your Threaded Code Pluggable
+> Recommendation: Make your thread-based code especially pluggable so that you can run it in various configurations.
+
+### Make Your Threaded Code Tunable
+Allow the number of threads to be easily tuned. Consider allowing it to change while the system is running. Consider allowing self-tuning based on throughput and system utilization.
+
+### Run with More Threads Than Processors 
+* Things happen when the system switches between tasks. To encourage task swapping, run with more threads than processors or cores. The more frequently your tasks swap, the more likely you’ll encounter code that is missing a critical section or causes deadlock.
+
+### Run on Different Platforms
+> Recommendation: Run your threaded code on all target platforms early and often.
+
+### Instrument Your Code to Try and Force Failures
+* The reason that threading bugs can be infrequent, sporadic, and hard to repeat, is that only a very few pathways out of the many thousands of possible pathways through a vulnerable section actually fail. So the probability that a failing pathway is taken can be startlingly low.
+* Each of these methods can affect the order of execution, thereby increasing the odds of detecting a flaw. It’s better when broken code fails as early and as often as possible.
+
+## Conclusion
+* First and foremost, follow the Single Responsibility Principle. Break your system into POJOs that separate thread-aware code from thread-ignorant code. Make sure when you are testing your thread-aware code, you are only testing it and nothing else. This suggests that your thread-aware code should be small and focused.
+* Learn how to find regions of code that must be locked and lock them. Do not lock regions of code that do not need to be locked. Avoid calling one locked section from another.
+* Change designs of the objects with shared data to accommodate clients rather than forcing clients to manage shared state.
