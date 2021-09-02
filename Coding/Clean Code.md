@@ -447,3 +447,12 @@ Allow the number of threads to be easily tuned. Consider allowing it to change w
 * It is not enough for code to work. Code that works is often badly broken. Programmers who satisfy themselves with merely working code are behaving unprofessionally. They may fear that they don’t have time to improve the structure and design of their code, but I disagree. Nothing has a more profound and long-term degrading effect upon a development project than bad code. Bad schedules can be redone, bad requirements can be redefined. Bad team dynamics can be repaired. But bad code rots and ferments, becoming an inexorable weight that drags the team down. Time and time again I have seen teams grind to a crawl because, in their haste, they created a malignant morass of code that forever thereafter dominated their destiny. 
 * Of course bad code can be cleaned up. But it’s very expensive. As code rots, the modules insinuate themselves into each other, creating lots of hidden and tangled dependencies. Finding and breaking old dependencies is a long and arduous task. On the other hand, keeping code clean is relatively easy. If you made a mess in a module in the morning, it is easy to clean it up in the afternoon. Better yet, if you made a mess five minutes ago, it’s very easy to clean it up right now. 
 * So the solution is to continuously keep your code as clean and simple as it can be. Never let the rot get started.
+
+# Chapter 16 - Refactoring SerialDate
+* It is usually a bad idea to pass a flag as an argument to a function, especially when that flag simply selects the format of the output.
+
+# Chapter 17 - Smell and Heuristics
+* The list that follows includes many of Martin’s smells and adds many more of my own. It also includes other pearls and heuristics that I use to practice my trade.
+* I compiled this list by walking through several different programs and refactoring them. As I made each change, I asked myself why I made that change and then wrote the reason down here. The result is a rather long list of things that smell bad to me when I read code. 
+* This list is meant to be read from top to bottom and also to be used as a reference.
+> consult the book.
